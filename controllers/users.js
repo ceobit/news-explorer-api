@@ -5,7 +5,9 @@ const { NotFoundError, Conflict } = require('../errors/errors');
 const { SECRET_KEY } = require('../config');
 
 module.exports.getUser = (req, res, next) => {
-  User.findById(req.params.userId)
+  const { email } = req.body;
+
+  User.findOne({ email })
     .orFail(() => new NotFoundError('Данные в базе данных не обнаружены'))
     .then((users) => res.send({ data: users }))
     .catch(next);
