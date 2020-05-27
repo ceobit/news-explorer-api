@@ -22,7 +22,7 @@ module.exports.createArticle = (req, res, next) => {
 module.exports.deleteArticle = (req, res, next) => {
   const { articleId } = req.params;
 
-  Article.findById(articleId)
+  Article.findById(articleId).select('+owner')
     .orFail(() => new NotFoundError('Данные в базе данных не обнаружены'))
     .then((articles) => {
       if (!articles.owner.equals(req.user._id)) {
