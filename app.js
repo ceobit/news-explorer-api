@@ -8,6 +8,8 @@ const routers = require('./routers');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 const errorsHandler = require('./middlewares/errorsHandler');
 const limiter = require('./middlewares/rate-limiter');
+const { NotFoundError } = require('./errors/errors');
+const { ResourceNotFoundMessage } = require('./errors/errorsMessages');
 
 const { PORT, dbURI } = require('./config');
 
@@ -54,8 +56,8 @@ app.use(cookieParser());
 app.use(requestLogger);
 
 app.use('/', routers);
-app.use('*', (req, res) => {
-  res.status(404).send({ message: 'Запрашиваемый ресурс не найден' });
+app.use('*', () => {
+  throw new NotFoundError(ResourceNotFoundMessage);
 });
 
 // логгер ошибок

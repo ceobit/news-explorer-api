@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const validator = require('validator');
+const { ErrorLinkMessage } = require('../errors/errorsMessages');
 
 const articleSchema = new mongoose.Schema({
   keyword: {
@@ -38,7 +39,7 @@ const articleSchema = new mongoose.Schema({
   },
 });
 
-articleSchema.path('link').validate((link) => validator.isURL(link), 'Введите ссылку в правильном формате');
-articleSchema.path('image').validate((image) => validator.isURL(image), 'Введите ссылку в правильном формате');
+articleSchema.path('link').validate((link) => validator.isURL(link), ErrorLinkMessage);
+articleSchema.path('image').validate((image) => validator.isURL(image), ErrorLinkMessage);
 
 module.exports = mongoose.model('article', articleSchema);
