@@ -19,5 +19,5 @@ module.exports = {
   ErrorIdMessage,
   ErrorEmailMessage,
   ErrorLoginOrPassMessage,
-  ResourceNotFoundMessage
+  ResourceNotFoundMessage,
 };
