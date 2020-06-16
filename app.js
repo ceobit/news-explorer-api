@@ -5,6 +5,7 @@ const mongoose = require('mongoose');
 const helmet = require('helmet');
 const { errors } = require('celebrate');
 const routers = require('./routers');
+const cors = require('cors')
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 const errorsHandler = require('./middlewares/errorsHandler');
 const limiter = require('./middlewares/rate-limiter');
@@ -43,6 +44,7 @@ mongoose.connection.on('disconnected', () => {
 });
 
 //  Заполняем req.body
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -51,6 +53,8 @@ app.use(helmet());
 app.use(limiter);
 
 app.use(cookieParser());
+
+app.use(cors());
 
 //  логгер запросов
 app.use(requestLogger);
