@@ -3,7 +3,7 @@ const { NotFoundError, Forbidden } = require('../errors/errors');
 const { DataNotFoundMessage, NotAccessMessage, DataDeletedMessage } = require('../errors/errorsMessages');
 
 module.exports.getAllArticles = (req, res, next) => {
-  Article.find({})
+  Article.find({ owner: req.user._id })
     .orFail(() => new NotFoundError(DataNotFoundMessage))
     .then((articles) => res.send({ data: articles }))
     .catch(next);
