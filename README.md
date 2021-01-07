@@ -1,6 +1,2 @@
-# Дипломный проект news-explorer-api
+# BackEnd project "news-explorer"
 
-Дипломный проект выполнен в рамках курса "Веб-разработка" в Яндекс Практикум.
-
-IP адрес 84.201.146.240<br>
-www.api.it-todo.ru
